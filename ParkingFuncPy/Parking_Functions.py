@@ -1,10 +1,15 @@
 import parkingFunc as pf
 import pfTree
+import os
 
 func = None
+prevfunc = None
 
 while True:
     user = input(">>")
+    
+    comm = ""
+    inp = ""
     
     if ":" in user:
         comm, inp = user.split(":")
@@ -14,7 +19,20 @@ while True:
     comm = comm.strip()
     inp = inp.strip()
     
+    if comm == "clr":
+        os.system('cls')
+        continue
+    
     if comm == "input":
+    
+        if inp == "":
+            continue
+            
+        if inp == "prevfunc":
+            if prevfunc != None:
+                func, prevfunc = prevfunc.copy(), func.copy()
+            continue
+    
         li = inp.split(" ")
         try:
             input_ = [int(i) for i in li]
@@ -23,9 +41,41 @@ while True:
             continue
         else:
             pass
+        if func != None:
+            prevfunc = func.copy()
         func = pf.getPF(input_)
+        if len(func["input"])>10:
+            print(">>func[...]")
+        else:
+            print(f'>>func{func["input"]}')
+            
+    elif comm == "prevfunc":
+        if prevfunc == None:
+            print(">>func[]")
+            continue
+            
+        if inp == "":
+            if len(prevfunc["input"])>10:
+                print(">>func[...]")
+            else:
+                print(f'>>func{prevfunc["input"]}')
+            continue
+        else:
+            print(">>Function isn't active.")
+            continue
         
     elif comm == "func":
+    
+        if func == None:
+            print(">>func[]")
+            continue
+    
+        if inp == "":
+            if len(func["input"])>10:
+                print(">>func[...]")
+            else:
+                print(f'>>func{func["input"]}')
+            continue
         
         if inp == "attr":
             print("Attributes:")
@@ -75,7 +125,7 @@ while True:
                     try:
                         print(f'>>{func["specDetail"][key]}')
                     except:
-                        print(">>Invalid.")
+                        print(">>Invalid position.")
                         continue
                     else:
                         pass
@@ -84,8 +134,24 @@ while True:
                 continue
             
     elif comm == "tree":
+    
+        if inp == "":
+            print(f'>>Function required.')
+            continue
+    
         li = inp.split(" ")
+        
+        if li[0] == 'prevfunc':
+            print(">>Function isn't active.")
+            continue
+        
         if li[0] == 'func':
+            if func['isPF'] == False:
+                print(">>Invalid function.")
+                continue
+            if len(li)==1:
+                pfTree.getTree(func, processed = False)
+                continue
             if li[1] == 'up':
                 pfTree.getTree(func, processed = False)
             elif li[1] == 'p':
