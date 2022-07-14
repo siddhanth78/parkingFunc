@@ -19,6 +19,9 @@ while True:
     comm = comm.strip()
     inp = inp.strip()
     
+    if comm == "":
+        continue
+    
     if comm == "clr":
         os.system('cls')
         continue
