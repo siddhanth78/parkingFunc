@@ -1,6 +1,6 @@
 def help_():
     
-    print(">>Enter help:<command> for more info.")
+    print(">>Type help:<command> for more info.")
     print("List of commands:")
     print("    input")
     print("    func")
@@ -18,12 +18,12 @@ def input_():
     
 def func():
 
-    print("func:[<attr>]")
+    print("func:[<attribute>]")
     print("Display the 'func' object and its attributes.")
-    print("Attributes:")
+    print("attribute:")
     print("    attr:                    All attributes of the function.")
     print("    isPF:                    True if function is a parking function and False if not.")
-    print("    length:                  Length of function.")
+    print("    length:                  Number of cars in the function.")
     print("    input:                   Input loaded into 'func'.")
     print("    outcome:                 Result of input.")
     print("    outcomeInv:              Inverse of outcome.")

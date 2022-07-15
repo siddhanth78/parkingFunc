@@ -6,6 +6,10 @@ import helpmenu
 func = None
 prevfunc = None
 
+print("Parking Functions v2.4")
+print("Siddhanth L\n")
+print("Type 'help' for more info.\n")
+
 while True:
     user = input(">>")
     

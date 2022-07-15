@@ -1,4 +1,4 @@
-def getPF(li, tolerance=0):
+def getPF(li):
     
     li_copy = li.copy()
     length = len(li_copy)
@@ -25,20 +25,13 @@ def getPF(li, tolerance=0):
               'outcomeInv':None,
              'error':None}
     
-    max_tolerance = length+min(li_copy)-1
-    
-    if tolerance>max_tolerance:
-        pfData['error'] = "Tolerance can't be greater than maximum available spot."
+    if 1 not in li_copy:
+        pfData['error'] = "Function doesn't contain preference '1'."
         return pfData
-
     
     for n in li_copy:
-        if tolerance==0:
-            if n>length:
-                pfData['error'] = "Preference can't be greater than length."
-                return pfData
-        elif n>tolerance:
-            pfData['error'] = "Preference can't be greater than tolerance."
+        if n>length:
+            pfData['error'] = "Preference can't be greater than length."
             return pfData
         elif n<1:
             pfData['error'] = "Preference can't be zero or lesser."
@@ -46,9 +39,7 @@ def getPF(li, tolerance=0):
     
     #Specification----------------------------
     
-    min_val = min(li_copy)
-    
-    for i in range(min_val, length+min_val):
+    for i in range(1, length+1):
         num_cars_dict[i] = li_copy.count(i)
         
     #-----------------------------------------
@@ -94,7 +85,7 @@ def getPF(li, tolerance=0):
         pfData['orderPermInv'] = inverseop
         return pfData
     else:
-        pfData['error'] = "Invalid input."
+        pfData['error'] = "One or more cars didn't get a spot."
         return pfData
         
 def getOrderPerm(li_copy, li):

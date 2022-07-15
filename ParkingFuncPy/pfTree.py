@@ -39,11 +39,9 @@ def getTree(pfunc, processed = False):
         stages.append(tree_stage)
     
     if processed == False:
-        print("Unprocessed tree:")
         axtree.show()
     elif processed == True:
-        print("Processed tree:")
-        stages[0].show()
+        stages[0].show(line_type="ascii-em")
 
 def processVertex(vertex, stage, ogtree, map_outcome, map_input):
     
