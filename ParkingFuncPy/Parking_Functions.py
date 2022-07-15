@@ -1,6 +1,7 @@
 import parkingFunc as pf
 import pfTree
 import os
+import helpmenu
 
 func = None
 prevfunc = None
@@ -82,15 +83,17 @@ while True:
         
         if inp == "attr":
             print("Attributes:")
-            print(f'    isPF:       {func["isPF"]}')
-            print(f'    length:     {func["length"]}')
-            print(f'    input:      {func["input"]}')
-            print(f'    outcome:    {func["outcome"]}')
-            print(f'    outcomeInv: {func["outcomeInv"]}')
-            print(f'    nonDecArr:  {func["nonDecArr"]}')
-            print(f'    spec:       {func["spec"]}')
-            print(f'    specDetail: {func["specDetail"]}')
-            print(f'    error:      {func["error"]}')
+            print(f'    isPF:         {func["isPF"]}')
+            print(f'    length:       {func["length"]}')
+            print(f'    input:        {func["input"]}')
+            print(f'    outcome:      {func["outcome"]}')
+            print(f'    outcomeInv:   {func["outcomeInv"]}')
+            print(f'    nonDecArr:    {func["nonDecArr"]}')
+            print(f'    spec:         {func["spec"]}')
+            print(f'    specDetail:   {func["specDetail"]}')
+            print(f'    orderPerm:    {func["orderPerm"]}')
+            print(f'    orderPermInv: {func["orderPermInv"]}')
+            print(f'    error:        {func["error"]}')
         elif inp == "isPF":
             print(f'>>{func["isPF"]}')
         elif inp == 'input':
@@ -168,6 +171,28 @@ while True:
             
     elif comm == "quit":
         break
+        
+    elif comm == "help":
+        if inp == "":
+            helpmenu.help_()
+        elif inp == "input":
+            helpmenu.input_()
+        elif inp == "func":
+            helpmenu.func()
+        elif inp == "prevfunc":
+            helpmenu.prevfunc()
+        elif inp == "tree":
+            helpmenu.tree()
+        elif inp == "quit":
+            print("quit")
+            print("Quit the terminal.")
+        elif inp == "clr":
+            print("clr")
+            print("Clear the terminal.")
+        else:
+            print(">>Invalid input.")
+            continue
+        
         
     else:
         print(">>Invalid input.")
