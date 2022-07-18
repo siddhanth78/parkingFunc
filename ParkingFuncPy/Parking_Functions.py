@@ -214,11 +214,11 @@ while True:
         elif inp == "tree":
             helpmenu.tree()
         elif inp == "quit":
-            print("quit")
-            print("Quit the terminal.")
+            print("\nquit")
+            print("Quit the terminal.\n")
         elif inp == "clr":
-            print("clr")
-            print("Clear the terminal.")
+            print("\nclr")
+            print("Clear the terminal.\n")
         else:
             print(">>Invalid input.")
             continue
