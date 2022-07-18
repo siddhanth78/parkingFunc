@@ -39,9 +39,9 @@ def getTree(pfunc, processed = False):
         stages.append(tree_stage)
     
     if processed == False:
-        axtree.show()
+        return axtree, processed
     elif processed == True:
-        stages[0].show(line_type="ascii-em")
+        return stages[0], processed
 
 def processVertex(vertex, stage, ogtree, map_outcome, map_input):
     
@@ -75,6 +75,29 @@ def processVertex(vertex, stage, ogtree, map_outcome, map_input):
     stage.get_node(node_at_pos).tag = tag
     
     return stage
+    
+def inversionPairs(tree):
+    #Get path to all leaves
+    li_path = tree.paths_to_leaves()
+
+    inversions = []
+
+    for i in li_path:
+        n = 0
+        if len(i) == 2:
+            inversions.append([tree.get_node(i[1]).tag,None])
+            continue
+        for j in i:
+            jtag = tree.get_node(j).tag
+            for k in range(n, len(i)):
+                ktag = tree.get_node(i[k]).tag
+                #Compare tags
+                if jtag > ktag:
+                    #Add tag pairs to list of inversions
+                    if [jtag,ktag] not in inversions:
+                        inversions.append([jtag,ktag])
+            n+=1
+    return inversions, len(inversions)
 
 
 def auxiliaryTree(pf):

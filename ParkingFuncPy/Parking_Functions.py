@@ -2,11 +2,14 @@ import parkingFunc as pf
 import pfTree
 import os
 import helpmenu
+from treelib import Tree
 
 func = None
-prevfunc = None
+tree = None
+pro = False
+built = False
 
-print("Parking Functions v2.4")
+print("Parking Functions v3.2")
 print("Siddhanth L\n")
 print("Type 'help' for more info.\n")
 
@@ -35,11 +38,6 @@ while True:
     
         if inp == "":
             continue
-            
-        if inp == "prevfunc":
-            if prevfunc != None:
-                func, prevfunc = prevfunc.copy(), func.copy()
-            continue
     
         li = inp.split(" ")
         try:
@@ -49,28 +47,11 @@ while True:
             continue
         else:
             pass
-        if func != None:
-            prevfunc = func.copy()
         func = pf.getPF(input_)
         if len(func["input"])>10:
             print(">>func[...]")
         else:
             print(f'>>func{func["input"]}')
-            
-    elif comm == "prevfunc":
-        if prevfunc == None:
-            print(">>func[]")
-            continue
-            
-        if inp == "":
-            if len(prevfunc["input"])>10:
-                print(">>func[...]")
-            else:
-                print(f'>>func{prevfunc["input"]}')
-            continue
-        else:
-            print(">>Function isn't active.")
-            continue
         
     elif comm == "func":
     
@@ -86,7 +67,7 @@ while True:
             continue
         
         if inp == "attr":
-            print("Attributes:")
+            print("\nAttributes:")
             print(f'    isPF:         {func["isPF"]}')
             print(f'    length:       {func["length"]}')
             print(f'    input:        {func["input"]}')
@@ -97,7 +78,7 @@ while True:
             print(f'    specDetail:   {func["specDetail"]}')
             print(f'    orderPerm:    {func["orderPerm"]}')
             print(f'    orderPermInv: {func["orderPermInv"]}')
-            print(f'    error:        {func["error"]}')
+            print(f'    error:        {func["error"]}\n')
         elif inp == "isPF":
             print(f'>>{func["isPF"]}')
         elif inp == 'input':
@@ -142,32 +123,77 @@ while True:
             else:
                 print(">>Invalid input.")
                 continue
-            
-    elif comm == "tree":
-    
+                
+    elif comm == "build":
+        
         if inp == "":
-            print(f'>>Function required.')
             continue
-    
+            
+        if func == None:
+            print(">>Invalid input.")
+            continue
+            
         li = inp.split(" ")
-        
-        if li[0] == 'prevfunc':
-            print(">>Function isn't active.")
-            continue
-        
+            
         if li[0] == 'func':
             if func['isPF'] == False:
                 print(">>Invalid function.")
                 continue
             if len(li)==1:
-                pfTree.getTree(func, processed = False)
-                continue
-            if li[1] == 'up':
-                pfTree.getTree(func, processed = False)
+                tree, pro = pfTree.getTree(func, processed = False)
+            elif li[1] == 'up':
+                tree, pro = pfTree.getTree(func, processed = False)
             elif li[1] == 'p':
-                pfTree.getTree(func, processed = True)
+                tree, pro = pfTree.getTree(func, processed = True)
+                invp, invplen = pfTree.inversionPairs(tree)
             else:
                 print(">>Invalid input.")
+                continue
+            if len(func["input"])>10:
+                print(f'>>tree(func[...], {pro})')
+            else:
+                print(f'>>tree({func["input"]}, {pro})')
+        else:
+            print(">>Invalid input.")
+            continue
+            
+    elif comm == "tree":
+    
+        if tree == None:
+            print(">>tree[]")
+            continue
+    
+        if inp == "":
+            if len(func["input"])>10:
+                print(f'>>tree[func[...], {pro}]')
+            else:
+                print(f'>>tree[{func["input"]}, {pro}]')
+        elif inp == 'show':
+            if pro == False:
+                tree.show()
+            elif pro == True:
+                tree.show(line_type = 'ascii-em')
+        elif inp == 'attr':
+            print("\nAttributes:")
+            print(f'    func:    {func["input"]}')
+            print(f'    pstatus: {pro}')
+            if pro == True:
+                print(f'    inv:     {invp}\n')
+            else:
+                print(f'    inv:     None\n')
+        elif inp == 'pstatus':
+            print(f'>>{pro}')
+        elif inp == 'func':
+            print("\nInput details:")
+            print(f'    func:            {func["input"]}')
+            print(f'    func:outcome:    {func["outcome"]}')
+            print(f'    func:outcomeInv: {func["outcomeInv"]}\n')
+        elif inp == 'inv':
+            if pro == True:
+                print(f'\nDisplacement of input function: {invplen}')
+                print(f'Inversion pairs:                {invp}\n')
+            else:
+                print(">>Tree must be processed.")
                 continue
         else:
             print(">>Invalid input.")
@@ -183,8 +209,8 @@ while True:
             helpmenu.input_()
         elif inp == "func":
             helpmenu.func()
-        elif inp == "prevfunc":
-            helpmenu.prevfunc()
+        elif inp == "build":
+            helpmenu.build()
         elif inp == "tree":
             helpmenu.tree()
         elif inp == "quit":

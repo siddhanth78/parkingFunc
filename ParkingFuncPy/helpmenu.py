@@ -1,24 +1,24 @@
 def help_():
     
     print(">>Type help:<command> for more info.")
-    print("List of commands:")
+    print("\ncommand:")
     print("    input")
     print("    func")
-    print("    prevfunc")
+    print("    build")
     print("    tree")
     print("    clr:  Clear the terminal.")
-    print("    quit: Quit the terminal.")
+    print("    quit: Quit the terminal.\n")
     
 def input_():
 
-    print("input:<function>")
+    print("\ninput:<function>")
     print("Input a list of numbers to load into the 'func' object.")
     print("Numbers must be separated by a whitespace.")
-    print("Integers are the only valid input. Improper usage of whitespace may give undesirable results.")
+    print("Integers are the only valid input. Improper usage of whitespace may give undesirable results.\n")
     
 def func():
 
-    print("func:[<attribute>]")
+    print("\nfunc:[<attribute>]")
     print("Display the 'func' object and its attributes.")
     print("attribute:")
     print("    attr:                    All attributes of the function.")
@@ -32,21 +32,29 @@ def func():
     print("    specDetail [<position>]: Detailed spec.")
     print("    orderPerm:               Order permutation of function.")
     print("    orderPermInv:            Inverse of order permutation.")
-    print("    error:                   Error associated with the function during input processing.")
+    print("    error:                   Error associated with the function during input processing.\n")
     
-def prevfunc():
-
-    print("prevfunc")
-    print("Display previously used function.")
-    print("This function is inactive and cannot be used.")
-    print("input:prevfunc")
-    print("'prevfunc' can be loaded into 'func' through 'input'.")
+def build():
     
-def tree():
-
-    print("tree:<function> [<process>]")
-    print("Display tree representing the function.")
-    print("Displays unprocessed tree by default.")
+    print("\nbuild:func [<process>]")
+    print("Build tree using 'func' object to load into 'tree' object.")
+    print("Tree represents the inverse of the outcome of 'func'.")
     print("process:")
     print("    up: Unprocessed tree.")
     print("    p:  Processed tree.")
+    print("process 'up' by default.\n")
+    
+def tree():
+
+    print("\ntree:[<command>]")
+    print("Display tree object. Contains input function and process status.")
+    print("Process status:")
+    print("    False: Unprocessed tree.")
+    print("    True:  Processed tree.")
+    print("command:")
+    print("    show:    Display tree representing the inverse of the outcome of the function.")
+    print("    attr:    All attributes of the tree.")
+    print("    pstatus: Process status of the tree.")
+    print("    func:    Attributes of input function necessary for the tree.")
+    print("    inv:     Inversion pairs of the tree. Number of pairs is the displacement of the input function.")
+    print("Displacement is the total number of spots moved by all cars from their preferred to current spot.\n")
