@@ -43,7 +43,7 @@ while True:
         try:
             input_ = [int(i) for i in li]
         except:
-            print(">>Invalid function.")
+            print(">>Invalid input.")
             continue
         else:
             pass
