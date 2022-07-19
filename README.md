@@ -1,4 +1,4 @@
-# parkingFunc
+# Parking Functions
 
 ## Sample terminal output
 
