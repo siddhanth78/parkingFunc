@@ -1,6 +1,6 @@
 # parkingFunc
 
-## Sample py usage
+## Sample terminal output
 
     >>help
     >>Type help:<command> for more info.
