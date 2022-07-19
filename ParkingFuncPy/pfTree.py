@@ -98,9 +98,6 @@ def inversionPairs(tree):
 
     for i in li_path:
         n = 0
-        if len(i) == 2:
-            inversions.append([tree.get_node(i[1]).tag,None])
-            continue
         for j in i:
             jtag = tree.get_node(j).tag
             for k in range(n, len(i)):
