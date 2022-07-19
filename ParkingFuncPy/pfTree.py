@@ -52,22 +52,36 @@ def processVertex(vertex, stage, ogtree, map_outcome, map_input):
     #Create subtree with root vertex
     subtree = stage.subtree(n_id)
     
-    
     #Get all vertices of subtree excluding the root
     vertices = [i for i in subtree.expand_tree(n_id, mode = 1)]
-    root = vertices.pop(0)
+    vertextags = [subtree.get_node(i).tag for i in subtree.expand_tree(n_id, mode = 1)]
+    
+    #map vertex nid and tags
+    vertex_map = {}
+    
+    for i in range(0, len(vertices)):
+        vertex_map[vertices[i]] = vertextags[i]
     
     #(1 + kth outcome - kth preference of ogtree)
     pos = 1 + map_outcome[n_id] - map_input[n_id]
     
     #Get corresponding n_id
     vertices.sort()
+    vertextags.sort()
     
     #Get corresponding tag
     if len(vertices)<pos:
         pos = len(vertices)
-    node_at_pos = vertices[pos-1]
     
+    #Get list of nids and tags
+    nid_list = list(vertex_map.keys())
+    tag_list = list(vertex_map.values())
+    
+    #Get corresponding nid
+    stage_node_pos = tag_list.index(vertextags[pos-1])
+    node_at_pos = nid_list[stage_node_pos]
+    
+    #Get corresponding tag
     stage_node = stage.get_node(node_at_pos).tag
     
     #swap tags
