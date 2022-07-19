@@ -3,6 +3,7 @@
 ## Sample py usage
 
 >>help
+
 >>Type help:<command> for more info.
 
 command:
@@ -15,10 +16,14 @@ command:
 
 >>help:input
 
-input:<function>
-Input a list of numbers to load into the 'func' object.
-Numbers must be separated by a whitespace.
-Integers are the only valid input. Improper usage of whitespace may give undesirable results.
+input:<function>  
+
+Input a list of numbers to load into the 'func' object.  
+
+Numbers must be separated by a whitespace.  
+
+Integers are the only valid input. Improper usage of whitespace may give undesirable results.  
+
 
 >>help:func
 
